@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState, useEffect, memo } from "react";
+// import Content from "./components/Content/Content";
 
 function App() {
+  const [count, setCount] = useState(60);
+
+  const timerId = useRef();
+
+  const prevCount = useRef();
+
+  useEffect(() => {
+    prevCount.current = count;
+  }, [count]);
+
+  const handleStart = () => {
+    timerId.current = setInterval(() => {
+      setCount((prevCount) => prevCount - 1);
+    }, 1000);
+  };
+
+  const handleStop = () => {
+    clearInterval(timerId.current);
+  };
+
+  console.log(count, prevCount.current);
+
+  //   const [show, setShow] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: 20 }}>
+      {/* <button onClick={() => setShow(!show)}>Toggle</button>
+      <br />
+      {show && <Content />} */}
+
+      <h1>{count}</h1>
+      <button onClick={handleStart}>Start</button>
+      <button onClick={handleStop}>Stop</button>
     </div>
   );
 }
 
-export default App;
+export default memo(App);
