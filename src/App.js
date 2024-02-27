@@ -1,41 +1,36 @@
-import React, { useRef, useState, useEffect, memo } from "react";
-// import Content from "./components/Content/Content";
+// import { useRef } from "react";
+// import Heading from "./components/Heading";
+// import GlobalStyles from "./components/GlobalStyles";
+// import Button from "./components/Button";
+import { Routes, Route, Link } from "react-router-dom";
+
+import HomePage from "./pages/Home";
+import NewsPage from "./pages/News";
+import ContactPage from "./pages/Contact";
 
 function App() {
-  const [count, setCount] = useState(60);
-
-  const timerId = useRef();
-
-  const prevCount = useRef();
-
-  useEffect(() => {
-    prevCount.current = count;
-  }, [count]);
-
-  const handleStart = () => {
-    timerId.current = setInterval(() => {
-      setCount((prevCount) => prevCount - 1);
-    }, 1000);
-  };
-
-  const handleStop = () => {
-    clearInterval(timerId.current);
-  };
-
-  console.log(count, prevCount.current);
-
-  //   const [show, setShow] = useState(false);
   return (
-    <div style={{ padding: 20 }}>
-      {/* <button onClick={() => setShow(!show)}>Toggle</button>
-      <br />
-      {show && <Content />} */}
-
-      <h1>{count}</h1>
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handleStop}>Stop</button>
+    <div style={{ padding: 40, fontSize: 50 }}>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/news">News</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
     </div>
   );
 }
 
-export default memo(App);
+export default App;

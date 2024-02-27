@@ -1,0 +1,17 @@
+.btn {
+    padding: 15px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn:last-child {
+    margin-left: 10px;
+}
+
+.primary {
+    background: rgb(250, 185, 185);
+    color: #fff;
+}
